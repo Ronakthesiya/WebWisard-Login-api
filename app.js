@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const users = require('./loginSchema')
+var cors = require('cors');
 
 const DB = 'mongodb+srv://Ronak:GMAMR@cluster0.jxxzuw1.mongodb.net/first?retryWrites=true&w=majority';
 
@@ -15,7 +16,8 @@ mongoose.connect(DB,{
     const app = express();
 
     app.use(express.json());
-    app.use(bodyParser.urlencoded({extended:false}))
+    app.use(bodyParser.urlencoded({extended:false}));
+    app.use(cors());
 
     app.get('/',async(req,res)=>{
         const user = await users.find();
@@ -36,4 +38,3 @@ mongoose.connect(DB,{
         console.log("server Started");
     });
 }).catch((err)=>console.log('Not connect'));
-

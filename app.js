@@ -28,7 +28,8 @@ mongoose.connect(DB,{
     app.post('/',async(req,res)=>{
         const user = new users({
             userName : req.body.userName,
-            userPassword : req.body.userPassword
+            userPassword : req.body.userPassword,
+            userType : req.body.userType
         });
         await user.save();
         res.send(user);
